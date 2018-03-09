@@ -1,26 +1,36 @@
 ---
 driver:
-  name: vagrant
+  name: hyperv
+  parent_vhd_folder: c:\kitchen\2012r2-master-sp
+  parent_vhd_name: kitchen-master-2012r2.vhdx
+  vm_switch: External-WiFi
+  memory_startup_bytes: 2GB
+  vm_generation: 2
+  processor_count: 2
 
-provisioner:
-  name: chef_zero
-  # You may wish to disable always updating cookbooks in CI or other testing environments.
-  # For example:
-  #   always_update_cookbooks: <%= !ENV['CI'] %>
-  always_update_cookbooks: true
+transport:
+  password: Password12345
+  username: kitchen
+  name: winrm
 
 verifier:
   name: inspec
 
+provisioner:
+  name: chef_zero
+  retry_on_exit_code:
+    - 35
+  max_retries: 2
+  wait_for_retry: 300
+
 platforms:
-  - name: ubuntu-16.04
-  - name: centos-7
+  - name: windows-2012r2
 
 suites:
-  - name: default
+  - name: registry
     run_list:
-      - recipe[braves::default]
+      - recipe[braves::registry]
+    attributes:
     verifier:
       inspec_tests:
-        - test/smoke/default
-    attributes:
+        - test/smoke/registry
