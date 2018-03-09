@@ -30,7 +30,12 @@ suites:
   - name: registry
     run_list:
       - recipe[braves::registry]
-    attributes:
     verifier:
       inspec_tests:
         - test/smoke/registry
+  - name: cregistry
+    run_list:
+      - recipe[braves::cregistry]
+    verifier:
+      inspec_tests:
+        - test/smoke/cregistry

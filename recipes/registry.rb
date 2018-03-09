@@ -6,14 +6,14 @@
 
 dsc_resource 'Add Registry Key' do
   resource :Registry
-  property :Key, 'HKEY_LOCAL_MACHINE\SOFTWARE\Braves'
+  property :Key, 'HKEY_LOCAL_MACHINE\SOFTWARE\baseball'
   property :Ensure, 'Present'
   property :ValueName, ''
 end
 
 dsc_resource 'required_reg_items' do
   resource :Registry
-  property :Key, 'HKEY_LOCAL_MACHINE\SOFTWARE\Braves'
+  property :Key, 'HKEY_LOCAL_MACHINE\SOFTWARE\baseball'
   property :Ensure, 'Present'
   property :ValueName, 'BestTeamNL'
   property :ValueData, ['AtlantaBraves']
