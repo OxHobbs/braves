@@ -22,6 +22,7 @@ provisioner:
     - 35
   max_retries: 2
   wait_for_retry: 300
+  install_msi_url: http://192.168.86.40:8080/files/chef-client-13.4.24-1-x64.msi  
 
 platforms:
   - name: windows-2012r2

@@ -33,7 +33,16 @@ dsc_resource 'required_reg_items' do
   property :Key, 'HKEY_LOCAL_MACHINE\SOFTWARE\baseball'
   property :Ensure, 'Present'
   property :ValueName, 'BestTeamNL'
-  property :ValueData, ['AtlantaBraves']
+  property :ValueData, ['Braves']
+  property :ValueType, 'String'
+end
+
+dsc_resource 'al_team' do
+  resource :Registry
+  property :Key, 'HKEY_LOCAL_MACHINE\SOFTWARE\baseball'
+  property :Ensure, 'Present'
+  property :ValueName, 'BestTeamAL'
+  property :ValueData, ['Diamondbacks']
   property :ValueType, 'String'
 end
 

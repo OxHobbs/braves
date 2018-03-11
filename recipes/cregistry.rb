@@ -6,5 +6,6 @@
 
 braves_baseball 'my_team' do
   action :create
-  team 'Diamondbacks' # I know they're in the AL
+  al_team 'Diamondbacks'
+  nl_team 'Braves'
 end
