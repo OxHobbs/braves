@@ -4,6 +4,23 @@
 property :team, String, default: 'Braves'
 
 action :create do
+  dsc_resource 'InstallIIS' do
+    resource :WindowsFeature
+    property :Name, 'web-server'
+    property :Ensure, 'Present'
+  end
+
+  dsc_resource 'CreateHomePage' do
+    resource :File
+    property :Ensure, 'Present'
+    property :Contents, <<-EOH
+    <html><h3>My IP is #{node['ipaddress']} and my hostname is #{node['hostname']}</h3>
+    <body>Oh and my favorite team is the #{team}</body>
+    </html>
+    EOH
+    property :DestinationPath, 'c:/inetpub/wwwroot/default.htm' 
+  end
+
   dsc_resource 'Add Registry Key' do
     resource :Registry
     property :Key, 'HKEY_LOCAL_MACHINE\SOFTWARE\baseball'
@@ -29,6 +46,12 @@ action :create do
 end
 
 action :delete do
+  dsc_resource 'removeIIS' do
+    resource :WindowsFeature
+    property :Name, 'web-server'
+    property :Ensure, 'Absent'
+  end
+
   dsc_resource 'required_reg_items' do
     resource :Registry
     property :Key, 'HKEY_LOCAL_MACHINE\SOFTWARE\baseball'
