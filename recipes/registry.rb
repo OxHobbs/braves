@@ -4,6 +4,8 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
+log 'we all know Braves are the best team'
+
 dsc_resource 'InstallIIS' do
   resource :WindowsFeature
   property :Name, 'web-server'
